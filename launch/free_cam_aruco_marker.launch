@@ -3,7 +3,7 @@
   
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find visual_servoing)/worlds/empty.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+    <arg name="world_name" value="$(find visual_servoing)/worlds/aruco.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
@@ -13,7 +13,7 @@
      
     <!-- Generate/Load robot description file -->
     <!-- Load the URDF into the ROS Parameter Server -->
-    <param name="robot_description" command="$(find xacro)/xacro.py --inorder '$(find visual_servoing)/robot_description/free_flying_cam.xacro'" />
+    <param name="robot_description" command="$(find xacro)/xacro.py --inorder '$(find visual_servoing)/robot_description/free_flying_kinect.xacro'" />
     <!-- Spawn urdf into Gazebo -->
     <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model" output="screen" respawn="false" args="-urdf -param robot_description -model free_flying_cam"  />
   

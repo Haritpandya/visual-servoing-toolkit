@@ -43,8 +43,8 @@ def do_affine_warp(img):
     return img
     
 		
-def getkeypts(img):
-    corners = detect_Aruco(img,11)
+def getkeypts(img,marker_id):
+    corners = detect_Aruco(img,marker_id)
     return corners
 
 

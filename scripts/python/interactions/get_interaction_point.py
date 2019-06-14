@@ -10,31 +10,30 @@
     author email: haritpandya@gmail.com
 
 ''' 
+import numpy as np	
 
-
-def getinteraction_intensity(s,cam,Z):
-    KK=cam.K
+def get_interaction_point(s,KK,Z):
     px = KK[0,0]
     py = KK[1,1]
     v0=KK[0,2]
     u0=KK[0,2]
      
-    if(len(z.shape) == 1):
+    if(len(Z.shape) == 1):
         Zarr=Z*np.ones_like(s)
     else:
         Zarr=Z
 
-    Lsd=np.zeros(s.shape[0],6,dtype=np.float32)
+    Lsd=np.zeros((s.shape[0],6),dtype=np.float32)
 
     for m in range (0,Lsd.shape[0],2):
         x = (s[m] - u0)/px 
         y = (s[m+1] - v0)/py 
     
         Zinv =  1/Zarr[m]
-        Lsd[m,:] =  [-Zinv, 0, x*Zinv, x*y, -(1+x^2), y]
+        Lsd[m,:] =  np.array([-Zinv, 0, x*Zinv, x*y, -(1+x**2), y])
 
-        Zinv =  1/Zarr(m+1)
-        Lsd[m+1,0] =  [0, -Zinv, y*Zinv, 1+y^2, -x*y, -x]
+        Zinv =  1/Zarr[m+1]
+        Lsd[m+1,:] =  np.array([0, -Zinv, y*Zinv, 1+y**2, -x*y, -x])
     
     
     return Lsd
